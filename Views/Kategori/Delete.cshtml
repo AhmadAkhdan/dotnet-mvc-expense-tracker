@@ -1,0 +1,33 @@
+﻿@model dotnet_mvc_expense_tracker.Models.Kategori
+
+@{
+    ViewData["Title"] = "Hapus Kategori";
+}
+
+<div class="card card-danger">
+    <div class="card-header">
+        <h3 class="card-title">Konfirmasi Hapus</h3>
+    </div>
+    <div class="card-body">
+        <h4>Apakah Anda yakin ingin menghapus data ini?</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-4">Nama</dt>
+            <dd class="col-sm-8">@Html.DisplayFor(model => model.Nama)</dd>
+
+            <dt class="col-sm-4">Tipe</dt>
+            <dd class="col-sm-8">@Html.DisplayFor(model => model.Tipe)</dd>
+
+            <dt class="col-sm-4">Status</dt>
+            <dd class="col-sm-8">@Html.DisplayFor(model => model.Status)</dd>
+        </dl>
+    </div>
+    <div class="card-footer">
+        <form asp-action="Delete">
+            @* Kirim ID data yang akan dihapus *@
+            <input type="hidden" asp-for="Id" />
+            <input type="submit" value="Hapus" class="btn btn-danger" />
+            <a asp-action="Index" class="btn btn-secondary">Batal</a>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,71 @@
+﻿@model IEnumerable<dotnet_mvc_expense_tracker.Models.Kategori>
+
+@{
+    ViewData["Title"] = "Master Kategori";
+}
+
+@* Bagian ini khusus untuk menambahkan file CSS yang hanya dibutuhkan di halaman ini *@
+@section Styles {
+    <link rel="stylesheet" href="~/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+}
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">List Kategori</h3>
+        <div class="card-tools">
+            @* Tombol ini akan mengarahkan ke halaman Tambah Data *@
+            <a asp-action="Create" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Tambah Data
+            </a>
+        </div>
+    </div>
+    <div class="card-body">
+        <table id="kategoriTable" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Nama</th>
+                    <th>Tipe</th>
+                    <th>Status</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                @* Looping untuk menampilkan setiap data kategori dari Controller *@
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Nama</td>
+                        <td>@item.Tipe</td>
+                        <td>@item.Status</td>
+                        <td>
+                            @* Tombol-tombol aksi untuk setiap baris data *@
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-info">Edit</a>
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-secondary">Lihat</a>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Hapus</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@* Bagian ini khusus untuk menambahkan file JavaScript yang hanya dibutuhkan di halaman ini *@
+@section Scripts {
+    <script src="~/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+
+    @* Script untuk mengaktifkan plugin DataTables pada tabel dengan id="kategoriTable" *@
+    <script>
+        $(function () {
+            $("#kategoriTable").DataTable({
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+            });
+        });
+    </script>
+}
